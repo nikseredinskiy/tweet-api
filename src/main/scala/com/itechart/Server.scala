@@ -9,7 +9,7 @@ import ch.megard.akka.http.cors.scaladsl.CorsDirectives.cors
 import org.slf4j.{Logger, LoggerFactory}
 
 import scala.concurrent.ExecutionContext
-import scala.io.StdIn
+import scala.concurrent.duration.DurationInt
 
 object Server extends App {
   private val logger: Logger = LoggerFactory.getLogger(Server.getClass)
@@ -25,9 +25,12 @@ object Server extends App {
 
   val bindingFuture = Http().newServerAt(TweetApi.host, TweetApi.port.toInt).bind(routes)
 
-  logger.info(s"Server online at http://${TweetApi.host}:${TweetApi.port}/\nPress RETURN to stop...")
-  StdIn.readLine() // let it run until user presses return
-  bindingFuture
-    .flatMap(_.unbind()) // trigger unbinding from the port
-    .onComplete(_ => system.terminate()) // and shutdown when done
+  logger.info(s"Server online at http://${TweetApi.host}:${TweetApi.port}/")
+
+  sys.addShutdownHook({
+    bindingFuture
+      .flatMap(_.terminate(1.second))
+      .flatMap(_ => Http().shutdownAllConnectionPools)
+      .flatMap(_ => system.terminate())
+  })
 }
