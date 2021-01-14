@@ -1,0 +1,17 @@
+version: '3'
+services:
+  tweet-ui:
+    ports:
+      - '9000:9000'
+    image: 'hivemind/tweet-ui:latest'
+  tweet-api:
+    ports:
+      - '8080:8080'
+    image: 'test/tweet-api:latest'
+  sentiment-analysis:
+    ports:
+      - '8000:8000'
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+    image: 'hivemind/sentiment-analysis:latest'
