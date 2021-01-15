@@ -2,7 +2,7 @@ name := "tweet-api"
 
 version := "0.1"
 
-scalaVersion := "2.13.4"
+scalaVersion := "2.12.10"
 
 val AkkaVersion = "2.6.8"
 val AkkaHttpVersion = "10.2.2"
@@ -16,6 +16,11 @@ libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-classic" % "1.2.3",
   "ch.megard" %% "akka-http-cors" % "1.1.1"
 )
+
+libraryDependencies += "com.softwaremill.macwire" %% "macros" % "2.3.7" % "provided"
+libraryDependencies += "com.softwaremill.macwire" %% "macrosakka" % "2.3.7" % "provided"
+libraryDependencies += "com.softwaremill.macwire" %% "util" % "2.3.7"
+libraryDependencies += "com.softwaremill.macwire" %% "proxy" % "2.3.7"
 
 enablePlugins(JavaAppPackaging)
 

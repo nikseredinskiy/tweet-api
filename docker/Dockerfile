@@ -2,7 +2,7 @@ FROM openjdk:10-jre-slim as BUILD
 
 # Env variables
 ENV SBT_VERSION 1.4.6
-ENV SCALA_VERSION 2.13.4
+ENV SCALA_VERSION 2.12.10
 
 # Install Scala
 RUN \

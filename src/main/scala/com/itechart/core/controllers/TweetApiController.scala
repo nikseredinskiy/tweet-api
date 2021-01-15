@@ -1,8 +1,8 @@
 package com.itechart.core.controllers
 
 import akka.http.scaladsl.server.{Directives, Route}
-import com.itechart.core.impl.TweetApiImpl
 import com.itechart.core.EntityStorage
+import com.itechart.core.services.TweetApiService
 import com.itechart.core.JsonSupport._
 
 final case class CheckTweetRequest(content: String)
@@ -35,7 +35,7 @@ final case class SentimentAnalysisResponse(label: String, sentiment: Sentiment)
 
 object TweetApiController extends Directives {
 
-  val impl: TweetApiImpl = EntityStorage.tweetApiImpl
+  val impl: TweetApiService = EntityStorage.tweetApiService
 
   def checkTweet: Route = {
     pathPrefix("analysis") {
@@ -50,9 +50,5 @@ object TweetApiController extends Directives {
     }
   }
 
-
-  val routes: Route = pathPrefix("api") {
-    checkTweet
-  }
-
+  val routes: Route = checkTweet
 }

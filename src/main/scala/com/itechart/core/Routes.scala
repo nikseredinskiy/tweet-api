@@ -1,19 +1,22 @@
 package com.itechart.core
 
-import akka.http.scaladsl.server.Directives.{complete, handleExceptions}
+import akka.http.scaladsl.server.Directives.{complete, handleExceptions, pathPrefix}
 import akka.http.scaladsl.server.{ExceptionHandler, Route}
 import com.itechart.core.exceptions.CustomExceptions.ServerErrorException
-import com.itechart.core.controllers.TweetApiController
 import org.slf4j.LoggerFactory
 import com.itechart.core.JsonSupport._
+import com.itechart.core.controllers.TweetApiController
 
 case class HttpErrorResponse(message: String)
 
 object Routes {
 
-  lazy val serviceRoutes: Route = handleExceptions(customHandler) {
-    TweetApiController.routes
-  }
+  lazy val serviceRoutes: Route =
+    handleExceptions(customHandler) {
+      pathPrefix("api") {
+        TweetApiController.routes
+      }
+    }
 
   val customHandler: ExceptionHandler = {
     val log = LoggerFactory.getLogger("ExceptionHandler")

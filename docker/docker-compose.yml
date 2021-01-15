@@ -3,15 +3,38 @@ services:
   tweet-ui:
     ports:
       - '9000:9000'
-    image: 'hivemind/tweet-ui:latest'
+    image: 'hivemind/tweet-ui'
+    container_name: 'tweet-api_tweet-ui_1'
+    build: 
+      context: ../../tweet-ui/
+      dockerfile: ./docker/Dockerfile
+      args: 
+        base_url: http://localhost:8080
+    networks:
+      - tweet-api-network    
   tweet-api:
     ports:
       - '8080:8080'
-    image: 'test/tweet-api:latest'
+    image: 'test/tweet-api'
+    container_name: 'tweet-api_tweet-api_1'
+    build: 
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    networks:
+      - tweet-api-network  
   sentiment-analysis:
     ports:
       - '8000:8000'
     environment:
       - HOST=0.0.0.0
       - PORT=8000
-    image: 'hivemind/sentiment-analysis:latest'
+    image: 'hivemind/sentiment-analysis'
+    container_name: 'tweet-api_sentiment-analysis_1'
+    build: 
+      context: ../../sentiment-analysis/
+      dockerfile: ./docker/Dockerfile
+    networks:
+      - tweet-api-network  
+networks:
+  tweet-api-network:
+    driver: bridge      
