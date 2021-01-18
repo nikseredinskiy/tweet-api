@@ -3,7 +3,7 @@ services:
   tweet-ui:
     ports:
       - '9000:9000'
-    image: 'hivemind/tweet-ui'
+    image: 'nikseredinskiy/tweet-ui:latest'
     container_name: 'tweet-api_tweet-ui_1'
     build: 
       context: ../../tweet-ui/
@@ -15,7 +15,7 @@ services:
   tweet-api:
     ports:
       - '8080:8080'
-    image: 'test/tweet-api'
+    image: 'nikseredinskiy/tweet-api:latest'
     container_name: 'tweet-api_tweet-api_1'
     build: 
       context: ../
@@ -28,7 +28,7 @@ services:
     environment:
       - HOST=0.0.0.0
       - PORT=8000
-    image: 'hivemind/sentiment-analysis'
+    image: 'nikseredinskiy/sentiment-analysis:latest'
     container_name: 'tweet-api_sentiment-analysis_1'
     build: 
       context: ../../sentiment-analysis/
