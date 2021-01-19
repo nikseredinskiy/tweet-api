@@ -11,6 +11,8 @@ services:
     container_name: 'tweet-api_tweet-ui_1'
     networks:
       - tweet-api-network
+    environment:
+      - BASE_URL=http://${IP}:8080
   tweet-api:
     ports:
       - '8080:8080'
