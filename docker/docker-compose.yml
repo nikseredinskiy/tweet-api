@@ -17,9 +17,6 @@ services:
       - '8080:8080'
     image: 'nikseredinskiy/tweet-api:latest'
     container_name: 'tweet-api_tweet-api_1'
-    build: 
-       context: ../
-       dockerfile: ./docker/Dockerfile
     networks:
       - tweet-api-network
   sentiment-analysis:
@@ -30,9 +27,6 @@ services:
       - PORT=8000
     image: 'nikseredinskiy/sentiment-analysis:latest'
     container_name: 'tweet-api_sentiment-analysis_1'
-    build: 
-       context: ../../sentiment-analysis/
-       dockerfile: ./docker/Dockerfile
     networks:
       - tweet-api-network
 networks:
