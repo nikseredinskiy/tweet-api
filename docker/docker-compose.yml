@@ -24,7 +24,7 @@ services:
     ports:
       - '8000:8000'
     environment:
-      - HOST=0.0.0.0
+      - HOST=120.0.0.0
       - PORT=8000
     image: 'nikseredinskiy/sentiment-analysis:latest'
     container_name: 'tweet-api_sentiment-analysis_1'
