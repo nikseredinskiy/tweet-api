@@ -1,15 +1,14 @@
 version: '3'
+networks:
+  tweet-api-network:
+    name: tweet-api-network
+    driver: bridge    
 services:
   tweet-ui:
     ports:
       - '9000:9000'
     image: 'nikseredinskiy/tweet-ui:latest'
     container_name: 'tweet-api_tweet-ui_1'
-    build: 
-       context: ../../tweet-ui/
-       dockerfile: ./docker/Dockerfile
-       args: 
-         base_url: http://${IP}:8080
     networks:
       - tweet-api-network
   tweet-api:
@@ -29,6 +28,3 @@ services:
     container_name: 'tweet-api_sentiment-analysis_1'
     networks:
       - tweet-api-network
-networks:
-  tweet-api-network:
-    driver: bridge      
