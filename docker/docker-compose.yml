@@ -2,7 +2,7 @@ version: '3'
 networks:
   tweet-api-network:
     name: tweet-api-network
-    driver: host
+    driver: bridge
 services:
   tweet-ui:
     ports:
