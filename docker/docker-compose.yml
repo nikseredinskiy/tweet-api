@@ -4,7 +4,7 @@ services:
     ports:
       - '9000:9000'
     environment:
-      - BASE_URL="http://${IP}:8080"
+      - BASE_URL=http://${IP}:8080
     image: 'nikseredinskiy/tweet-ui:latest'
     container_name: 'tweet-api_tweet-ui_1'
     networks:
