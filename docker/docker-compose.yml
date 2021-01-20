@@ -9,8 +9,13 @@ services:
       - '9000:9000'
     environment:
       - BASE_URL=http://${IP}:8080
-    image: 'nikseredinskiy/tweet-ui:latest'
+    image: 'nikseredinskiy/tweet-ui'
     container_name: 'tweet-api_tweet-ui_1'
+    build:
+      context: ../../tweet-ui/
+      dockerfile: ./docker/Dockerfile
+      args:
+        base_url: http://${IP}:8080
     networks:
       - tweet-api-network
   tweet-api:
