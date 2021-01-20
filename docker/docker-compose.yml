@@ -1,7 +1,6 @@
 version: '3'
 networks:
   tweet-api-network:
-    name: tweet-api-network
     driver: bridge
 services:
   tweet-ui:
